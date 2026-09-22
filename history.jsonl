@@ -1,0 +1,3 @@
+{"timestamp": "2026-09-22T14:16:37Z", "git_sha": "05a1955", "scorer": "inspectai_defect_scorer", "accuracy": 0.7498417895892874, "latency_ms": 110.96339623133342, "n": 180}
+{"timestamp": "2026-09-22T14:17:06Z", "git_sha": "05a1955", "scorer": "inspectai_defect_scorer", "accuracy": 7.692307692307692e-06, "latency_ms": 110.53817007276747, "n": 180}
+{"timestamp": "2026-09-22T14:17:39Z", "git_sha": "05a1955", "scorer": "inspectai_defect_scorer", "accuracy": 0.7498417895892874, "latency_ms": 109.06354321373834, "n": 180}

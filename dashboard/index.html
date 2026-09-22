@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EvalTrack trend</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #0f1115; color: #e8e8e8; margin: 2rem; }
+  h1 { font-size: 1.1rem; color: #9fb4ff; }
+  #status { margin: 0.5rem 0 1.5rem; font-size: 0.9rem; color: #aaa; }
+  canvas { background: #171a21; border-radius: 8px; }
+  .row { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .card { flex: 1; min-width: 320px; }
+  input[type=file] { color: #e8e8e8; }
+</style>
+</head>
+<body>
+<h1>EvalTrack — accuracy &amp; latency over time</h1>
+<div id="status">Load a history.jsonl file to see the trend (no server needed, runs entirely in the browser).</div>
+<input type="file" id="file" accept=".jsonl">
+<div class="row">
+  <div class="card"><canvas id="accChart" width="480" height="220"></canvas></div>
+  <div class="card"><canvas id="latChart" width="480" height="220"></canvas></div>
+</div>
+
+<script>
+function parseJsonl(text) {
+  return text.split("\n").map(l => l.trim()).filter(Boolean).map(l => JSON.parse(l));
+}
+
+function drawLine(canvasId, values, label, color) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#ccc";
+  ctx.font = "13px system-ui";
+  ctx.fillText(label, 10, 16);
+
+  if (values.length === 0) return;
+  const pad = 30;
+  const w = canvas.width - pad * 2, h = canvas.height - pad * 2;
+  const min = Math.min(...values), max = Math.max(...values);
+  const range = (max - min) || 1;
+
+  ctx.strokeStyle = "#333";
+  ctx.strokeRect(pad, pad, w, h);
+
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  values.forEach((v, i) => {
+    const x = pad + (i / Math.max(values.length - 1, 1)) * w;
+    const y = pad + h - ((v - min) / range) * h;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    ctx.fillStyle = color;
+    ctx.fillRect(x - 2, y - 2, 4, 4);
+  });
+  ctx.stroke();
+
+  ctx.fillStyle = "#888";
+  ctx.fillText(max.toFixed(4), pad, pad - 6);
+  ctx.fillText(min.toFixed(4), pad, pad + h + 16);
+}
+
+document.getElementById("file").addEventListener("change", (e) => {
+  const reader = new FileReader();
+  reader.onload = () => {
+    const records = parseJsonl(reader.result);
+    document.getElementById("status").textContent =
+      `${records.length} runs loaded, scorer(s): ${[...new Set(records.map(r => r.scorer))].join(", ")}`;
+    drawLine("accChart", records.map(r => r.accuracy), "accuracy", "#7fd1a1");
+    drawLine("latChart", records.map(r => r.latency_ms), "latency (ms)", "#f2b880");
+  };
+  reader.readAsText(e.target.files[0]);
+});
+</script>
+</body>
+</html>

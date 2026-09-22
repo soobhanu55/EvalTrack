@@ -1,0 +1,30 @@
+name: Eval regression check
+
+on:
+  push:
+    paths:
+      - "examples/**"
+      - "evaltrack/**"
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e . -r requirements.txt
+      - name: Run the InspectAI defect-detection eval
+        working-directory: examples
+        run: python -m evaltrack.runner inspectai_defect_scorer --history ../history.jsonl
+      - name: Check for regression against the previous run
+        run: python -m evaltrack.regression inspectai_defect_scorer --history history.jsonl
+      - name: Commit updated history
+        if: success()
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add history.jsonl
+          git diff --staged --quiet || git commit -m "eval: record run from ${{ github.sha }}"
+          git push
