@@ -19,7 +19,7 @@ jobs:
         working-directory: examples
         run: python -m evaltrack.runner inspectai_defect_scorer --history ../history.jsonl
       - name: Check for regression against the previous run
-        run: python -m evaltrack.regression inspectai_defect_scorer --history history.jsonl
+        run: python -m evaltrack.regression inspectai_defect_scorer --history history.jsonl --window 3
       - name: Commit updated history
         if: success()
         run: |

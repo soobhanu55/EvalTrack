@@ -74,21 +74,42 @@ cd ..
 python -m evaltrack.regression inspectai_defect_scorer --history history.jsonl
 ```
 
+## Noise-aware gate (v0.2)
+
+A fixed threshold ("fail on a 5-point drop") fires on noise whenever the scorer is not deterministic (LLM calls,
+sampling) or the eval set is small. If a scorer returns per-sample scores (`evaltrack.scorers.evaluate` does this for any
+`predict(x)` function and labelled dataset), the gate also requires the drop to be statistically real: an exact McNemar
+test on 0/1 scores, a paired bootstrap interval otherwise. The baseline can be the median of the last N runs
+(`--window N`) instead of just the previous one, and latency is compared on p95.
+
+Simulation of 2,000 run pairs per row (`scripts/simulate_gate.py`, `docs/gate_eval.md`):
+
+| Eval size | Fixed threshold, no real change | Significance gate, no real change | Fixed, real 6-8 point drop caught | Significance, real drop caught |
+|---|---|---|---|---|
+| 50 | 24.0% false alarms | 1.0% | 66.2% | 12.9% |
+| 100 | 15.2% | 1.6% | 71.5% | 21.5% |
+| 300 | 4.2% | 2.1% | 81.5% | 64.3% |
+
+The trade-off is explicit: the significance gate removes most false alarms but misses more real regressions on small
+evals, so use `--window` and larger eval sets, or keep the plain threshold for deterministic scorers (the InspectAI example,
+whose weights either match or do not).
+
+```python
+from evaltrack.scorers import evaluate
+def run():
+    return evaluate(my_model.predict, [(x1, y1), (x2, y2)])   # accuracy, p95 latency, per-sample scores
+```
+
+Quality gates on this repo: 32 tests, 97% line coverage (CI fails below 90%).
+
 ## Limitations, stated honestly
 
-- **Compares only the two most recent runs**, not a rolling average or a
-  statistically robust baseline. Good enough to catch an obvious
-  regression like the one demonstrated above, not tuned for detecting
-  small, noisy drift over many runs.
-- **The worked example is a vision model, not an LLM**, chosen so the
-  demo runs free and fast with no API key needed. The interface
-  (`run() -> {accuracy, latency_ms, n}`) is exactly what an LLM-eval
-  scorer would also implement, calling an LLM API inside `run()` instead
-  of a local model, nothing else in the harness changes.
-- **Dashboard is intentionally minimal.** No charting library, no
-  aggregation across multiple scorers on one chart, it plots one
-  scorer's history because that's what the worked example needed, not
-  because more wasn't possible.
+- **The worked example is a vision model, not an LLM**, chosen so the demo runs free and fast with no API key. A scorer
+  that calls an LLM only needs `run()` to return the same dict; nothing else changes. The significance gate is validated
+  on simulated noise, not on a live LLM.
+- **The significance test is on one eval set.** It cannot tell a model regression from a shifted eval set; keep the
+  eval set fixed and versioned.
+- **Dashboard is intentionally minimal.** It plots one scorer's history from `history.jsonl`.
 
 ## Cost: €0.00
 

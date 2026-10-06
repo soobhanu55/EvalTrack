@@ -36,6 +36,9 @@ def run_scorer(scorer_module: str) -> dict:
     missing = required - result.keys()
     if missing:
         raise ValueError(f"scorer.run() missing required keys: {missing}")
+    samples = result.get("samples")
+    if samples is not None and len(samples) != result["n"]:
+        raise ValueError(f"scorer returned {len(samples)} per-sample scores for n={result['n']}")
 
     return result
 

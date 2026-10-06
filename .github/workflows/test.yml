@@ -14,5 +14,5 @@ jobs:
           python-version: "3.11"
           cache: pip
       # regression logic has no heavy deps, so skip ultralytics/torch here
-      - run: pip install -e . pytest
-      - run: pytest -q
+      - run: pip install -e . pytest pytest-cov
+      - run: pytest -q --cov=evaltrack --cov-report=term-missing --cov-fail-under=90
