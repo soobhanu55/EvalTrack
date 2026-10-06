@@ -7,3 +7,7 @@ examples/data/test/labels.cache
 .env
 .env.*
 !.env.example
+
+.coverage
+htmlcov/
+coverage.xml
