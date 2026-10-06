@@ -1,5 +1,8 @@
 name: Eval regression check
 
+permissions:
+  contents: write   # the job commits history.jsonl back; without this the push gets a 403
+
 on:
   push:
     paths:
@@ -20,6 +23,9 @@ jobs:
         run: python -m evaltrack.runner inspectai_defect_scorer --history ../history.jsonl
       - name: Check for regression against the previous run
         run: python -m evaltrack.regression inspectai_defect_scorer --history history.jsonl --window 3
+      - name: Job summary
+        if: always()
+        run: python -m evaltrack.report inspectai_defect_scorer --history history.jsonl >> "$GITHUB_STEP_SUMMARY"
       - name: Commit updated history
         if: success()
         run: |
@@ -27,4 +33,5 @@ jobs:
           git config user.email "actions@github.com"
           git add history.jsonl
           git diff --staged --quiet || git commit -m "eval: record run from ${{ github.sha }}"
+          git pull --rebase
           git push
