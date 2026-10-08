@@ -100,13 +100,35 @@ def run():
     return evaluate(my_model.predict, [(x1, y1), (x2, y2)])   # accuracy, p95 latency, per-sample scores
 ```
 
-Quality gates on this repo: 32 tests, 97% line coverage (CI fails below 90%).
+Quality gates on this repo: 36 tests, 97% line coverage (CI fails below 90%).
+
+## Spend gate for LLM scorers (v0.3)
+
+A prompt change can raise accuracy and still be a bad deploy if it multiplies what every request costs. A scorer built with
+`evaltrack.scorers.evaluate_llm` reports tokens per sample, and the gate fails when that rises more than `--max-token-increase`
+(default 50%) over the baseline, whatever accuracy did.
+
+`examples/lexpilot_tier_scorer.py` is a real LLM scorer, free and local: Qwen2.5-1.5B-Instruct classifies 60 AI-system
+descriptions into EU AI Act risk tiers (LexPilot's evaluation set). Two prompts, real runs on an RTX 4050:
+
+| Run | Prompt | Accuracy | Tokens / sample | p95 latency | Gate |
+|---|---|---|---|---|---|
+| 1 | terse (one-line instruction) | 35.0% | 67 | 147 ms | baseline |
+| 2 | verbose (tier definitions + 4 examples) | 61.7% | 361 | 163 ms | **fails: tokens +441%** |
+
+```
+REGRESSION: tokens per sample rose 441.2% (67 -> 361), exceeds allowed 50%
+```
+
+The verbose prompt is clearly better (+26.7 points), and the gate still stops it, because at a hosted per-token price the same
+traffic would cost about 5x as much. The decision is then explicit: accept it by rerunning with `--max-token-increase 5`, or
+shorten the prompt. Tokens are a proxy for cost here (the local model costs nothing); multiply by your provider's price for euros.
+The LLM example is not in CI (it needs torch and a model download); the InspectAI example is.
 
 ## Limitations, stated honestly
 
-- **The worked example is a vision model, not an LLM**, chosen so the demo runs free and fast with no API key. A scorer
-  that calls an LLM only needs `run()` to return the same dict; nothing else changes. The significance gate is validated
-  on simulated noise, not on a live LLM.
+- **The CI example is a vision model; the LLM example runs locally.** The significance gate is validated on simulated noise,
+  not on a live LLM; the spend gate is demonstrated on one prompt change with a 1.5B model, not on a hosted API.
 - **The significance test is on one eval set.** It cannot tell a model regression from a shifted eval set; keep the
   eval set fixed and versioned.
 - **Dashboard is intentionally minimal.** It plots one scorer's history from `history.jsonl`.

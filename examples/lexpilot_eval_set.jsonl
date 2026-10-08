@@ -1,0 +1,60 @@
+{"id": 1, "text": "Our city app gives every resident a trust score built from jaywalking footage, social media posts and who they are friends with, and low scorers lose access to the public pool.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(c)"}
+{"id": 2, "text": "A shopping app that uses hidden audio cues below the level people can consciously hear to push them into impulse purchases they would not otherwise make.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(a)"}
+{"id": 3, "text": "A toy chatbot tuned to exploit the limited judgement of young children so they pester parents into buying in-app extras.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(b)"}
+{"id": 4, "text": "We built a face database by crawling millions of photos from social networks and CCTV archives without anyone's consent, to resell as a search tool.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(e)"}
+{"id": 5, "text": "A call-centre product that reads employees' voices and faces all day to infer their emotions and flag staff who seem insufficiently enthusiastic.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(f)"}
+{"id": 6, "text": "Exam proctoring software for a university that infers students' emotional state from webcam video and penalises anxious-looking students.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(f)"}
+{"id": 7, "text": "A camera system that sorts people at the entrance by likely religion and sexual orientation inferred from their faces.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(g)"}
+{"id": 8, "text": "A police tool that predicts which individuals will commit a crime next year based only on their personality traits and neighbourhood profile.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(d)"}
+{"id": 9, "text": "Live face recognition on street cameras across a city centre that matches every passer-by against a watchlist in real time for the local police.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(h)"}
+{"id": 10, "text": "A landlord platform that ranks tenants by a social-behaviour score aggregated from unrelated online activity and refuses housing to the lowest-ranked.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(c)"}
+{"id": 11, "text": "A political campaign tool that generates personalised messages designed to bypass people's rational decision-making and covertly change how they vote.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(a)"}
+{"id": 12, "text": "A loan marketing bot that targets people with dementia and addiction problems with aggressive offers, precisely because they are less able to resist.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(b)"}
+{"id": 13, "text": "A retail analytics system that categorises shoppers by political opinion inferred from their facial features.", "tier": "prohibited", "lang": "en", "basis": "Art. 5(1)(g)"}
+{"id": 14, "text": "Unsere Stadtverwaltung vergibt anhand von Verhalten im Alltag und Online-Aktivitäten einen Bürgerscore, der über den Zugang zu Sozialleistungen mitentscheidet.", "tier": "prohibited", "lang": "de", "basis": "Art. 5(1)(c)"}
+{"id": 15, "text": "Eine Software wertet im Büro per Kamera die Mimik der Mitarbeitenden aus, um ihre Stimmung zu erkennen und Leistungsgespräche darauf aufzubauen.", "tier": "prohibited", "lang": "de", "basis": "Art. 5(1)(f)"}
+{"id": 16, "text": "We want an AI that screens incoming CVs and automatically rejects candidates below a score before any recruiter sees them.", "tier": "high-risk", "lang": "en", "basis": "Annex III(4)(a)"}
+{"id": 17, "text": "A tool that decides which warehouse staff get promoted or dismissed based on their measured productivity and behaviour.", "tier": "high-risk", "lang": "en", "basis": "Annex III(4)(b)"}
+{"id": 18, "text": "Software a university uses to decide which applicants are admitted to its master's programmes.", "tier": "high-risk", "lang": "en", "basis": "Annex III(3)(a)"}
+{"id": 19, "text": "An automatic grader that evaluates secondary school exams and determines pupils' final marks.", "tier": "high-risk", "lang": "en", "basis": "Annex III(3)(b)"}
+{"id": 20, "text": "A credit scoring model a bank uses to approve or decline consumer loan applications.", "tier": "high-risk", "lang": "en", "basis": "Annex III(5)(b)"}
+{"id": 21, "text": "A health insurer's model that sets individual premiums based on a risk assessment of each applicant.", "tier": "high-risk", "lang": "en", "basis": "Annex III(5)(c)"}
+{"id": 22, "text": "A municipal system that decides whether citizens are eligible for housing benefit and unemployment support.", "tier": "high-risk", "lang": "en", "basis": "Annex III(5)(a)"}
+{"id": 23, "text": "A control system that balances load on the regional electricity grid and acts as a safety component of its operation.", "tier": "high-risk", "lang": "en", "basis": "Annex III(2)"}
+{"id": 24, "text": "A police tool that assesses the risk that a convicted person will reoffend, used when deciding on release conditions.", "tier": "high-risk", "lang": "en", "basis": "Annex III(6)(d)"}
+{"id": 25, "text": "An immigration authority system that assists officials in examining asylum applications and assessing the reliability of evidence.", "tier": "high-risk", "lang": "en", "basis": "Annex III(7)(c)"}
+{"id": 26, "text": "A court tool that researches case law and suggests how the law applies to the facts of a dispute for the judge.", "tier": "high-risk", "lang": "en", "basis": "Annex III(8)(a)"}
+{"id": 27, "text": "Remote identification of people from recorded CCTV footage, matched afterwards against a database, used by an airport authority.", "tier": "high-risk", "lang": "en", "basis": "Annex III(1)(a)"}
+{"id": 28, "text": "A vision system that acts as the safety function of an industrial robot, stopping the arm when a person enters the cell (machinery regulation).", "tier": "high-risk", "lang": "en", "basis": "Annex I (safety component)"}
+{"id": 29, "text": "Wir setzen eine KI ein, die Bewerbungen vorsortiert und Kandidaten automatisch aussortiert, bevor die Personalabteilung sie sieht.", "tier": "high-risk", "lang": "de", "basis": "Annex III(4)(a)"}
+{"id": 30, "text": "Unsere Bank bewertet mit einem Modell die Kreditwürdigkeit von Privatkunden und entscheidet damit über Kreditzusagen.", "tier": "high-risk", "lang": "de", "basis": "Annex III(5)(b)"}
+{"id": 31, "text": "A website chatbot that answers customers' questions about delivery times and returns.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(1)"}
+{"id": 32, "text": "A virtual assistant on our bank's app that talks with customers in natural language about opening hours and card replacement.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(1)"}
+{"id": 33, "text": "A text-to-image generator marketing teams use to create synthetic product photos for adverts.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(2)"}
+{"id": 34, "text": "A tool that produces realistic video of our CEO announcing results, clearly labelled as AI-generated, for internal training.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(4)"}
+{"id": 35, "text": "A service that writes articles and press releases automatically and publishes them to the public.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(2)"}
+{"id": 36, "text": "A voice bot that answers the company hotline and schedules callbacks.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(1)"}
+{"id": 37, "text": "A voice-cloning feature that lets creators produce synthetic speech of themselves for podcasts, with a disclosure label.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(4)"}
+{"id": 38, "text": "A customer support agent for our telecom that handles billing questions through a chat window.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(1)"}
+{"id": 39, "text": "An AI that generates synthetic stock footage and audio clips for video editors.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(2)"}
+{"id": 40, "text": "An onboarding assistant that chats with new employees to answer HR questions.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(1)"}
+{"id": 41, "text": "A marketing copy generator that writes social media posts and newsletters from a short brief.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(2)"}
+{"id": 42, "text": "A conversational shopping assistant embedded in our webshop that recommends products through dialogue.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(1)"}
+{"id": 43, "text": "A deepfake face-swap app for entertainment that labels every output as artificially generated.", "tier": "limited-risk", "lang": "en", "basis": "Art. 50(4)"}
+{"id": 44, "text": "Ein Chatbot auf unserer Webseite, der Kundenfragen zu Lieferzeiten und Rückgaben beantwortet.", "tier": "limited-risk", "lang": "de", "basis": "Art. 50(1)"}
+{"id": 45, "text": "Ein Programm, das automatisch Texte und Bilder für unsere Werbekampagnen erzeugt.", "tier": "limited-risk", "lang": "de", "basis": "Art. 50(2)"}
+{"id": 46, "text": "A spam filter for our corporate mailboxes.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 47, "text": "AI-controlled opponents in a mobile video game.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 48, "text": "A demand forecast that helps our warehouse decide how much stock of office supplies to reorder.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 49, "text": "A music recommender that suggests playlists to listeners.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 50, "text": "A photo app feature that automatically enhances brightness and removes noise from pictures.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 51, "text": "Predictive maintenance for the office printers that tells facilities when a toner or part is likely to fail.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 52, "text": "A grammar and spelling checker built into our word processor.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 53, "text": "Route optimisation for our parcel delivery vans that minimises fuel use.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 54, "text": "An invoice scanner that reads totals and dates from supplier PDFs to prefill bookkeeping entries.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 55, "text": "An AI that suggests which of our blog posts to promote on the homepage based on click-through rates.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 56, "text": "A recipe app feature that suggests meals from the ingredients in your fridge.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 57, "text": "A thermostat that learns when a household is home and adjusts the heating for comfort.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 58, "text": "An internal tool that tags support tickets by topic so they reach the right team.", "tier": "minimal-risk", "lang": "en", "basis": "no listed use"}
+{"id": 59, "text": "Ein Spamfilter für das E-Mail-Postfach unseres Unternehmens.", "tier": "minimal-risk", "lang": "de", "basis": "no listed use"}
+{"id": 60, "text": "Eine Software, die vorhersagt, wie viele Pakete wir nächste Woche in unserem Lager erwarten, um Personal einzuplanen.", "tier": "minimal-risk", "lang": "de", "basis": "no listed use"}
