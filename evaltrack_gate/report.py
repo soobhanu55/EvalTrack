@@ -4,7 +4,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from evaltrack.regression import check, load_history
+from evaltrack_gate.regression import check, load_history
 
 
 def markdown(records: list[dict], last: int = 10) -> str:

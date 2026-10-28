@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from evaltrack.regression import check  # noqa: E402
+from evaltrack_gate.regression import check  # noqa: E402
 
 RUNS = 2000
 

@@ -12,7 +12,7 @@ import statistics
 import sys
 from pathlib import Path
 
-from evaltrack.stats import mcnemar_exact, paired_bootstrap_diff
+from evaltrack_gate.stats import mcnemar_exact, paired_bootstrap_diff
 
 
 def load_history(path: Path, scorer: str) -> list[dict]:

@@ -13,7 +13,7 @@ import os
 import re
 from pathlib import Path
 
-from evaltrack.scorers import evaluate_llm
+from evaltrack_gate.scorers import evaluate_llm
 
 MODEL = os.environ.get("EVALTRACK_LLM", "Qwen/Qwen2.5-1.5B-Instruct")
 VARIANT = os.environ.get("PROMPT_VARIANT", "terse")

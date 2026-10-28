@@ -1,7 +1,7 @@
 import pytest
 
-from evaltrack.regression import accuracy_evidence, check
-from evaltrack.stats import mcnemar_exact, paired_bootstrap_diff, percentile
+from evaltrack_gate.regression import accuracy_evidence, check
+from evaltrack_gate.stats import mcnemar_exact, paired_bootstrap_diff, percentile
 
 
 def rec(acc, lat=100.0, samples=None, **extra):

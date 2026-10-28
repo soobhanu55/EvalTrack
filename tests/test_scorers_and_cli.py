@@ -3,9 +3,9 @@ import sys
 
 import pytest
 
-from evaltrack import report, runner
-from evaltrack.regression import load_history
-from evaltrack.scorers import evaluate
+from evaltrack_gate import report, runner
+from evaltrack_gate.regression import load_history
+from evaltrack_gate.scorers import evaluate
 
 
 def test_evaluate_scores_and_records_per_sample_results():
@@ -29,7 +29,7 @@ def test_evaluate_rejects_empty_dataset():
 @pytest.fixture
 def scorer_module(tmp_path, monkeypatch):
     (tmp_path / "toy_scorer.py").write_text(
-        "from evaltrack.scorers import evaluate\n"
+        "from evaltrack_gate.scorers import evaluate\n"
         "def run():\n    return evaluate(lambda x: x % 2, [(i, i % 2) for i in range(20)])\n", encoding="utf-8")
     monkeypatch.syspath_prepend(str(tmp_path))
     sys.modules.pop("toy_scorer", None)
@@ -76,13 +76,13 @@ def test_report_markdown_shows_status_and_table():
 
 
 def test_cli_entry_points_run_check_and_report(scorer_module, tmp_path, monkeypatch, capsys):
-    from evaltrack import regression
+    from evaltrack_gate import regression
 
     hist = str(tmp_path / "h.jsonl")
     monkeypatch.setattr(sys, "argv", ["runner", scorer_module, "--history", hist])
     assert runner.main() == 0
     assert runner.main() == 0  # second run so there is something to compare
-    monkeypatch.setattr(sys, "argv", ["regression", scorer_module, "--history", hist, "--window", "1"])
+    monkeypatch.setattr(sys, "argv", ["regression", scorer_module, "--history", hist, "--window", "1", "--max-latency-increase", "100"]  # sub-millisecond scorer: latency is noise)
     assert regression.main() == 0
     monkeypatch.setattr(sys, "argv", ["report", scorer_module, "--history", hist, "--last", "1"])
     assert report.main() == 0
@@ -90,10 +90,29 @@ def test_cli_entry_points_run_check_and_report(scorer_module, tmp_path, monkeypa
 
 
 def test_cli_exits_nonzero_on_regression(tmp_path, monkeypatch):
-    from evaltrack import regression
+    from evaltrack_gate import regression
 
     hist = tmp_path / "h.jsonl"
     rows = [{"scorer": "s", "accuracy": a, "latency_ms": 10.0, "n": 10, "timestamp": "t", "git_sha": "x"} for a in (0.9, 0.2)]
     hist.write_text("\n".join(json.dumps(r) for r in rows), encoding="utf-8")
     monkeypatch.setattr(sys, "argv", ["regression", "s", "--history", str(hist)])
     assert regression.main() == 1
+
+
+def test_cli_dispatches_subcommands_and_rejects_unknown(tmp_path, monkeypatch, capsys):
+    from evaltrack_gate import cli
+
+    history = tmp_path / "h.jsonl"
+    history.write_text(
+        '{"scorer": "s", "accuracy": 0.9, "latency_ms": 10, "n": 10}\n{"scorer": "s", "accuracy": 0.9, "latency_ms": 10, "n": 10}\n')
+    monkeypatch.setattr("sys.argv", ["evaltrack-gate", "check", "s", "--history", str(history)])
+    assert cli.main() == 0
+    monkeypatch.setattr("sys.argv", ["evaltrack-gate", "bogus"])
+    assert cli.main() == 2
+
+
+def test_scorer_in_the_current_directory_is_importable(tmp_path, monkeypatch):
+    (tmp_path / "cwd_only_scorer.py").write_text('def run():\n    return {"accuracy": 1.0, "latency_ms": 1.0, "n": 1}\n')
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr("sys.path", [p for p in __import__("sys").path if p not in ("", str(tmp_path))])
+    assert runner.run_scorer("cwd_only_scorer")["accuracy"] == 1.0

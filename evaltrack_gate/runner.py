@@ -8,6 +8,7 @@ three numbers honestly.
 import argparse
 import importlib
 import json
+import os
 import subprocess
 import sys
 import time
@@ -17,13 +18,15 @@ from pathlib import Path
 def _git_sha() -> str:
     try:
         return subprocess.check_output(
-            ["git", "rev-parse", "--short", "HEAD"], text=True
+            ["git", "rev-parse", "--short", "HEAD"], text=True, stderr=subprocess.DEVNULL
         ).strip()
     except Exception:
         return "unknown"
 
 
 def run_scorer(scorer_module: str) -> dict:
+    if os.getcwd() not in sys.path:  # a console script, unlike `python -m`, does not put the current directory on the path
+        sys.path.insert(0, os.getcwd())
     mod = importlib.import_module(scorer_module)
     start = time.time()
     result = mod.run()

@@ -11,3 +11,5 @@ examples/data/test/labels.cache
 .coverage
 htmlcov/
 coverage.xml
+dist/
+build/

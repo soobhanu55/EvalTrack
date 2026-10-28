@@ -7,7 +7,7 @@ on:
   push:
     paths:
       - "examples/**"
-      - "evaltrack/**"
+      - "evaltrack_gate/**"
 
 jobs:
   eval:
@@ -20,17 +20,17 @@ jobs:
       - run: pip install -e . -r requirements.txt
       - name: Run the InspectAI defect-detection eval
         working-directory: examples
-        run: python -m evaltrack.runner inspectai_defect_scorer --history ../history.jsonl
+        run: python -m evaltrack_gate.runner inspectai_defect_scorer --history ../history.jsonl
       - name: Check for regression against the previous run
-        run: python -m evaltrack.regression inspectai_defect_scorer --history history.jsonl --window 3
+        run: python -m evaltrack_gate.regression inspectai_defect_scorer --history history.jsonl --window 3
       - name: Job summary
         if: always()
-        run: python -m evaltrack.report inspectai_defect_scorer --history history.jsonl >> "$GITHUB_STEP_SUMMARY"
+        run: python -m evaltrack_gate.report inspectai_defect_scorer --history history.jsonl >> "$GITHUB_STEP_SUMMARY"
       - name: Commit updated history
         if: success()
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+          git config user.name "Bhanu Prakash"
+          git config user.email "prakashbhanu0808@gmail.com"
           git add history.jsonl
           git diff --staged --quiet || git commit -m "eval: record run from ${{ github.sha }}"
           git pull --rebase

@@ -1,2 +1,3 @@
+# for the repo's own eval workflow (the InspectAI example); the library itself needs nothing: pip install -e ".[dev]"
 ultralytics>=8.2
 pytest

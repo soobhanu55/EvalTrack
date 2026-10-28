@@ -1,4 +1,4 @@
-from evaltrack.regression import check
+from evaltrack_gate.regression import check
 
 
 def test_passes_with_less_than_two_runs():
@@ -52,27 +52,27 @@ def rec(acc, tokens=None, lat=100.0):
 
 
 def test_token_spend_increase_fails_the_gate_even_when_accuracy_improves():
-    from evaltrack.regression import check
+    from evaltrack_gate.regression import check
 
     ok, msg = check([rec(0.60, 200), rec(0.80, 700)])
     assert not ok and "tokens per sample rose 250.0%" in msg
 
 
 def test_token_spend_within_allowance_passes_and_is_reported():
-    from evaltrack.regression import check
+    from evaltrack_gate.regression import check
 
     ok, msg = check([rec(0.60, 200), rec(0.62, 260)])
     assert ok and "tokens/sample 200 -> 260" in msg
 
 
 def test_token_check_is_skipped_when_the_baseline_has_no_token_data():
-    from evaltrack.regression import check
+    from evaltrack_gate.regression import check
 
     assert check([rec(0.60), rec(0.62, 9999)])[0]
 
 
 def test_evaluate_llm_records_mean_token_usage():
-    from evaltrack.scorers import evaluate_llm
+    from evaltrack_gate.scorers import evaluate_llm
 
     out = evaluate_llm(lambda x: (x, {"input_tokens": 100 + x, "output_tokens": 10}), [(1, 1), (3, 3)])
     assert out["accuracy"] == 1.0 and out["input_tokens_mean"] == 102 and out["tokens_mean"] == 112

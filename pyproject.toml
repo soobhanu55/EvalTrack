@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evaltrack-gate"
+version = "0.3.0"
+description = "A CI gate for model evals: fails the build on a statistically real accuracy drop, a p95 latency rise or a token-spend jump."
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.9"
+dependencies = []          # standard library only
+keywords = ["llm", "evaluation", "regression", "ci", "mlops", "token-cost"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Testing",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov"]
+examples = ["ultralytics>=8.2"]      # the InspectAI vision example only
+
+[project.urls]
+Homepage = "https://github.com/soobhanu55/EvalTrack"
+Issues = "https://github.com/soobhanu55/EvalTrack/issues"
+Changelog = "https://github.com/soobhanu55/EvalTrack/blob/main/CHANGELOG.md"
+
+[project.scripts]
+evaltrack-gate = "evaltrack_gate.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["evaltrack_gate*"]
