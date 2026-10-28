@@ -8,7 +8,7 @@ version = "0.3.0"
 description = "A CI gate for model evals: fails the build on a statistically real accuracy drop, a p95 latency rise or a token-spend jump."
 readme = "README.md"
 license = {file = "LICENSE"}
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = []          # standard library only
 keywords = ["llm", "evaluation", "regression", "ci", "mlops", "token-cost"]
 classifiers = [
